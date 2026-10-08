@@ -1,0 +1,6 @@
+{
+  "name": "Conecta Itaú - Comunicação Oficial de Itaú-RN",
+  "description": "Plataforma oficial de comunicação e ouvidoria entre a população e as secretarias do Município de Itaú-RN.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

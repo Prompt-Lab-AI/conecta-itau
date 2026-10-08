@@ -1,0 +1,71 @@
+{
+  "entities": {
+    "Manifestation": {
+      "title": "Manifestation",
+      "description": "Uma solicitação, reclamação, denúncia ou elogio de um cidadão de Itaú-RN",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "protocol": { "type": "string" },
+        "accessKey": { "type": "string" },
+        "type": { "type": "string", "enum": ["solicitacao", "problema", "denuncia", "elogio"] },
+        "category": { "type": "string" },
+        "secretariatId": { "type": "string" },
+        "title": { "type": "string" },
+        "description": { "type": "string" },
+        "status": { "type": "string", "enum": ["novo", "em_analise", "encaminhado", "em_execucao", "concluido", "indeferido"] },
+        "priority": { "type": "string", "enum": ["baixa", "media", "alta", "urgente"] },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" },
+        "slaDays": { "type": "number" },
+        "assignedStaff": { "type": "string" }
+      },
+      "required": ["protocol", "type", "category", "secretariatId", "title", "description", "status"]
+    },
+    "Secretariat": {
+      "title": "Secretariat",
+      "description": "Secretaria municipal ou órgão público de Itaú-RN",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "acronym": { "type": "string" },
+        "secretaryName": { "type": "string" },
+        "phone": { "type": "string" },
+        "whatsapp": { "type": "string" },
+        "email": { "type": "string" },
+        "defaultSlaDays": { "type": "number" }
+      },
+      "required": ["name", "acronym", "secretaryName"]
+    },
+    "StaffUser": {
+      "title": "StaffUser",
+      "description": "Servidor municipal ou gestor público com acesso ao painel de Itaú-RN",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "email": { "type": "string" },
+        "role": { "type": "string", "enum": ["cidadao", "atendente", "secretario", "admin"] },
+        "roleTitle": { "type": "string" },
+        "phone": { "type": "string" },
+        "active": { "type": "boolean" }
+      },
+      "required": ["name", "email", "role"]
+    }
+  },
+  "firestore": {
+    "/manifestations/{manifestationId}": {
+      "schema": { "$ref": "#/entities/Manifestation" },
+      "description": "Coleção de manifestações e protocolos da população de Itaú-RN"
+    },
+    "/secretariats/{secretariatId}": {
+      "schema": { "$ref": "#/entities/Secretariat" },
+      "description": "Secretarias e departamentos municipais de Itaú-RN"
+    },
+    "/staff_users/{userId}": {
+      "schema": { "$ref": "#/entities/StaffUser" },
+      "description": "Servidores municipais autorizados para despacho e triagem"
+    }
+  }
+}

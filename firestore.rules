@@ -1,0 +1,32 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // Manifestações da população de Itaú-RN
+    match /manifestations/{manifestationId} {
+      allow read: if true;
+      allow create: if request.resource.data.protocol is string
+                    && request.resource.data.title is string
+                    && request.resource.data.description is string;
+      allow update: if true;
+      allow delete: if false;
+    }
+
+    // Secretarias Municipais
+    match /secretariats/{secretariatId} {
+      allow read: if true;
+      allow write: if true;
+    }
+
+    // Servidores Municipais
+    match /staff_users/{userId} {
+      allow read: if true;
+      allow write: if true;
+    }
+
+    // Test connection document
+    match /test/{docId} {
+      allow read, write: if true;
+    }
+  }
+}
